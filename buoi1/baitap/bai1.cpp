@@ -73,6 +73,7 @@ void setBaseSeed()
 
 float getRandomSeedPersudo(int &seed)
 {
+    // https://www.youtube.com/watch?v=sszXx69W9R4
     int sqrtSeed = seed * seed;
     int maxDigitSeed = countDigitInNumber(sqrtSeed);
     long long baseNumber = multiBy10(maxDigitSeed);
@@ -111,6 +112,32 @@ void printArray(float *array, int length)
     }
 }
 
+void sumAndMultiplerAllElementsInArray(float *array, int length)
+{
+    float sumResult = 0;
+    long long multiplerResult = 1;
+    for (int i = 0; i < length; i++)
+    {
+        sumResult += *(array + i);
+        multiplerResult *= *(array + i);
+    }
+    cout << "Sum of all elements in array is: " << sumResult << endl;
+    cout << "Multipler of all elements in array is: " << multiplerResult << endl;
+}
+
+void countTheApperanceOfAnElement(float *array, int length, float value)
+{
+    int count = 0;
+    for (int i = 0; i < length; i++)
+    {
+        if (*(array + i) == value)
+        {
+            count++;
+        }
+    }
+    cout << "Element with value " << value << " appear " << count << " time(s)!" << endl;
+}
+
 int main()
 {
     // 1. Tao gia tri ngau nhien (so thuc 2 chu so sau dau cham) thuoc (268; 339). SL ngau nhien thuoc [10;20]
@@ -121,4 +148,11 @@ int main()
 
     // 2. In mang vua tao
     printArray(randomArr, arrayLength);
+
+    // 3 & 4. Tong va tich cac gia tri trong mang
+    sumAndMultiplerAllElementsInArray(randomArr, arrayLength);
+
+    // 5. Dem so lan xuat hien 1 phan tu X bat ky
+    int selectedElement = getRandomBetween(0, arrayLength);
+    countTheApperanceOfAnElement(randomArr, arrayLength, randomArr[selectedElement]);
 }
