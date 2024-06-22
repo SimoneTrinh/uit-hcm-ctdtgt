@@ -106,9 +106,104 @@ void initDynamicArr(float *array, int &length)
 
 void printArray(float *array, int length)
 {
+    cout << "[";
     for (int i = 0; i < length; i++)
     {
-        cout << *(array + i) << endl;
+        cout << " " << *(array + i);
+    }
+    cout << " ]" << endl;
+}
+
+void printOddValueOfArray(float *array, int &length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        if ((int)*(array + i) % 2 == 1)
+        {
+            cout << *(array + i) << endl;
+        }
+    }
+}
+
+void printEvenValueOfArray(float *array, int &length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        if ((int)*(array + i) % 2 == 0)
+        {
+            cout << *(array + i) << endl;
+        }
+    }
+}
+
+void findMinValueOfArray(float *array, int &length)
+{
+    float result = *(array);
+    for (int i = 0; i < length; i++)
+    {
+        if (*(array + i) < result)
+        {
+            result = *(array + i);
+        }
+    }
+    cout << "Min value of given array is: " << result << endl;
+}
+
+void reverseArray(float *array, int &length)
+{
+    cout << "Array before reverse:  " << endl;
+    printArray(array, length);
+
+    float *start = array;
+    float *end = array + length - 1;
+    while (start < end)
+    {
+        // Hoan vi 2 dia chi
+        float temp = *start;
+        *start = *end;
+        *end = temp;
+
+        // Move toi 1 o nho tiep theo
+        start++;
+        end--;
+    }
+
+    cout << "Array after reverse:  " << endl;
+    printArray(array, length);
+}
+
+void printNegativeValueInArray(float *array, int &length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        if (*(array + i) < 0)
+        {
+            cout << "Found negative value:  " << *(array + i) << endl;
+        }
+    }
+}
+
+void printQuantityOfValueInArrayBetween(float *array, int &length, float min, float max)
+{
+    int count = 0;
+    for (int i = 0; i < length; i++)
+    {
+        if (*(array + i) > min && *(array + i) < max)
+        {
+            count++;
+        }
+    }
+    cout << "Found " << count << " value matching the condition!." << endl;
+}
+
+void printValueInArrayBetween(float *array, int &length, float min, float max)
+{
+    for (int i = 0; i < length; i++)
+    {
+        if (*(array + i) > min && *(array + i) < max)
+        {
+            cout << "Found value: " << *(array + i) << endl;
+        }
     }
 }
 
@@ -155,4 +250,23 @@ int main()
     // 5. Dem so lan xuat hien 1 phan tu X bat ky
     int selectedElement = getRandomBetween(0, arrayLength);
     countTheApperanceOfAnElement(randomArr, arrayLength, randomArr[selectedElement]);
+
+    // 6. In cac phan tu chan/le cua mang
+    printOddValueOfArray(randomArr, arrayLength);
+    printEvenValueOfArray(randomArr, arrayLength);
+
+    // 7. Tim phan tu nho nhat trong mang
+    findMinValueOfArray(randomArr, arrayLength);
+
+    // 8. Dao nguoc mang
+    reverseArray(randomArr, arrayLength);
+
+    // 9. In ra cac so am trong mang
+    printNegativeValueInArray(randomArr, arrayLength);
+
+    // 10. Tra ve so luong value trong mang thuoc [x , y]
+    printQuantityOfValueInArrayBetween(randomArr, arrayLength, 300, 400);
+
+    // 11. In cac gia tri trong mang thuoc [x, y]
+    printValueInArrayBetween(randomArr, arrayLength, 300, 400);
 }
