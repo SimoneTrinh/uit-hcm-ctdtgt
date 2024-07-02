@@ -47,7 +47,7 @@ void addHead(List &list, Node *pNode)
 
 void printList(List list)
 {
-    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    for (Node *p = list.pHead; p->pNext != NULL; p = p->pNext)
     {
         cout << p->data.value << endl;
     }
@@ -58,12 +58,12 @@ int main()
     List lst;
     initList(lst);
     Node *p1 = initNode({1});
-    // Node *p2 = initNode({2});
-    // Node *p3 = initNode({3});
+    Node *p2 = initNode({2});
+    Node *p3 = initNode({3});
     addHead(lst, p1);
-    // addHead(lst, p2);
-    // addHead(lst, p3);
+    addHead(lst, p2);
+    addHead(lst, p3);
     printList(lst);
-    cout << &lst.pHead->data << endl;
-    cout << &lst.pTail->data << endl;
+    // cout << &lst.pHead->data << endl;
+    // cout << &lst.pTail->data << endl;
 }
