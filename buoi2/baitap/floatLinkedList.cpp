@@ -79,6 +79,15 @@ void printList(List &list)
     cout << endl;
 }
 
+// 7. In DSLK kem dia chi tung node
+void printListWithAddress(List &list)
+{
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        cout << p->value << "|" << p << endl;
+    }
+}
+
 int main()
 {
     List list;
@@ -86,4 +95,5 @@ int main()
     int arr[] = {5, 6, 2, 3, 4, 6, 7};
     addArrayToList(list, arr, 3);
     printList(list);
+    printListWithAddress(list);
 }
