@@ -24,6 +24,11 @@ Node *initNode(float val)
     return pNode;
 }
 
+void printNode(Node *pNode)
+{
+    cout << "Node: " << pNode << " | Value: " << pNode->value << endl;
+}
+
 // 2. Khoi tao DSLK
 void initList(List &list)
 {
@@ -88,12 +93,79 @@ void printListWithAddress(List &list)
     }
 }
 
+// 8. Viet ham kiem tra DSLK rong hay khong
+int isEmptyList(List &list)
+{
+    if (list.pHead != NULL)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+// 9. Viet ham tra ve node thu n trong DSLK
+Node *getNodeIndex(List &list, int findIndex)
+{
+    int index = 0;
+    Node *pResult = new Node;
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (index == findIndex)
+        {
+            pResult = p;
+            break;
+        }
+        else
+        {
+            index++;
+        }
+    }
+    return pResult;
+}
+
+// 10. Tim kiem 1 node co gia tri X trong DSLK
+Node *findNodeValue(List &list, int findValue)
+{
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (p->value == findValue)
+        {
+            return p;
+            break;
+        }
+    }
+    return NULL;
+}
+
+// 12. Viet ham dem node co gia tri am/duong
+int countPositiveNodeValue(List &list)
+{
+    int count = 0;
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (p->value > 0)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
 int main()
 {
     List list;
     initList(list);
+
     int arr[] = {5, 6, 2, 3, 4, 6, 7};
     addArrayToList(list, arr, 3);
+
     printList(list);
+
     printListWithAddress(list);
+
+    Node *foundNode = getNodeIndex(list, 2);
+    printNode(foundNode);
+
+    Node *foundNodeValue = findNodeValue(list, 6);
+    printNode(foundNodeValue);
 }
