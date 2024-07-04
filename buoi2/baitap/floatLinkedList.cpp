@@ -137,6 +137,21 @@ Node *findNodeValue(List &list, int findValue)
     return NULL;
 }
 
+// 11. Tim kiem cac dia chi node co gia tri X trong DSLK
+List findNodes(List &pList, int findValue)
+{
+    List lst;
+    initList(lst);
+    for (Node *p = pList.pHead; p != NULL; p = p->pNext)
+    {
+        if (p->value == findValue)
+        {
+            addHead(lst, p);
+        }
+    }
+    return lst;
+}
+
 // 12. Viet ham dem node co gia tri am/duong
 int countPositiveNodeValue(List &list)
 {
@@ -151,13 +166,102 @@ int countPositiveNodeValue(List &list)
     return count;
 }
 
+int countNegativeNodeValue(List &list)
+{
+    int count = 0;
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (p->value < 0)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+// 13. Viet ham tim node co gia tri am lon nhat
+int findMaxNegativeNodeValue(List &list)
+{
+    int max;
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (p->value < 0)
+        {
+            max = p->value;
+            break;
+        }
+    }
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (p->value < 0)
+        {
+            if (p->value > max)
+            {
+                max = p->value;
+            }
+        }
+    }
+    return max;
+}
+
+// 13. Viet ham tim node co gia tri le nho nhat
+int findMaxOddNodeValue(List &list)
+{
+    int max;
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (int(p->value) % 2 != 0)
+        {
+            max = p->value;
+            break;
+        }
+    }
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (int(p->value) % 2 != 0)
+        {
+            if (p->value > max)
+            {
+                max = p->value;
+            }
+        }
+    }
+    return max;
+}
+
+// 14. Update node co gia tri X trong DSLK
+void *updateNodeValue(List &list, int findValue, int updateValue)
+{
+    for (Node *p = list.pHead; p != NULL; p = p->pNext)
+    {
+        if (p->value == findValue)
+        {
+            p->value = updateValue;
+        }
+    }
+    return 0;
+}
+
+// 15. Copy DSLK
+
+List copyList(List &originalList)
+{
+    List list;
+    initList(list);
+    for (Node *p = originalList.pHead; p != NULL; p = p->pNext)
+    {
+        addHead(list, p);
+    }
+    return list;
+}
+
 int main()
 {
     List list;
     initList(list);
 
-    int arr[] = {5, 6, 2, 3, 4, 6, 7};
-    addArrayToList(list, arr, 3);
+    int arr[] = {5, 6, 2, 3, 3, 6, 7};
+    addArrayToList(list, arr, 5);
 
     printList(list);
 
@@ -168,4 +272,14 @@ int main()
 
     Node *foundNodeValue = findNodeValue(list, 6);
     printNode(foundNodeValue);
+
+    List foundList;
+    initList(foundList);
+    foundList = findNodes(list, 3);
+    printList(foundList);
+
+    List cpList;
+    initList(cpList);
+    cpList = copyList(list);
+    printList(cpList);
 }
